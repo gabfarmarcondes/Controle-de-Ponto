@@ -1,5 +1,6 @@
-package controle_ponto.model;
+package controle_ponto.project.model;
 
+import controle_ponto.project.dto.RequestEmployee;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +24,10 @@ public class Employee {
 
     @Column(nullable = false, length = 50)
     private String job;
+
+    public Employee(RequestEmployee requestEmployeeemployee) {
+        this.id = requestEmployeeemployee.id();
+        this.name = requestEmployeeemployee.name();
+        this.job = requestEmployeeemployee.job();
+    }
 }

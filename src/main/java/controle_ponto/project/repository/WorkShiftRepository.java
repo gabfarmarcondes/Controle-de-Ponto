@@ -1,7 +1,7 @@
-package controle_ponto.repository;
+package controle_ponto.project.repository;
 
-import controle_ponto.model.Employee;
-import controle_ponto.model.WorkShift;
+import controle_ponto.project.model.Employee;
+import controle_ponto.project.model.WorkShift;
 
 import java.sql.Date;
 import java.util.Optional;

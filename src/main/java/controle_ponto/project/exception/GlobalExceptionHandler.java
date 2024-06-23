@@ -1,4 +1,4 @@
-package controle_ponto.exception;
+package controle_ponto.project.exception;
 
 
 import org.hibernate.TypeMismatchException;

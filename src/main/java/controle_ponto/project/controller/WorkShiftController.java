@@ -1,4 +1,4 @@
-package controle_ponto.controller;
+package controle_ponto.project.controller;
 
 
 import org.springframework.web.bind.annotation.RestController;

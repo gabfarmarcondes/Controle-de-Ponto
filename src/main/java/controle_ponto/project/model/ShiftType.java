@@ -1,4 +1,4 @@
-package controle_ponto.model;
+package controle_ponto.project.model;
 
 public enum ShiftType {
     MORNING,
