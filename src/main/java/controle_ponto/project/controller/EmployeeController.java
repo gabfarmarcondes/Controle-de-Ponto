@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -35,8 +36,19 @@ public class EmployeeController {
         return ResponseEntity.ok(newEmployee);
     }
 
-    @GetMapping("/test")
-    public String hello(){
-        return "Hello World";
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody @Validated RequestEmployee employee) {
+        Employee updatedEmployee = employeeRepository.findEmployeeById(id).orElseThrow(() -> new NoSuchElementException("Employee not found"));
+        updatedEmployee.setJob(employee.job());
+        updatedEmployee.setName(employee.name());
+        employeeRepository.save(updatedEmployee);
+        return ResponseEntity.ok(updatedEmployee);
+    }
+
+    @DeleteMapping("/delete{id}")
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id, @RequestBody @Validated RequestEmployee employee) {
+        Employee deletedEmployee = employeeRepository.findEmployeeById(id).orElseThrow(() -> new NoSuchElementException("Employee not found"));
+        employeeRepository.delete(deletedEmployee);
+        return ResponseEntity.ok(deletedEmployee);
     }
 }

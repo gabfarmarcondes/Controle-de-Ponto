@@ -19,6 +19,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(mappedBy = "employeeId", cascade = CascadeType.ALL)
+    private WorkShift workShift;
+
     @Column(nullable = false, length = 50)
     private String name;
 
