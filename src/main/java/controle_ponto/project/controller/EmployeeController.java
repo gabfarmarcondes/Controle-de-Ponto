@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -21,12 +22,13 @@ public class EmployeeController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Optional<Employee>> findEmployeeById(@PathVariable Long id) {
-        Optional<Employee> employee = employeeRepository.findEmployeeById(id);
-        if (employee.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(employee);
-        }
+        Optional<Employee> employee = Optional.ofNullable(employeeRepository.findEmployeeById(id).orElseThrow(() -> new NoSuchElementException("Employee not Found")));
+        return ResponseEntity.ok(employee);
+    }
+
+    @GetMapping("/find")
+    public ResponseEntity getAllEmployees() {
+        return ResponseEntity.ok(employeeRepository.findAll());
     }
 
     @PostMapping("/create")
@@ -45,7 +47,7 @@ public class EmployeeController {
         return ResponseEntity.ok(updatedEmployee);
     }
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
         Employee deletedEmployee = employeeRepository.findEmployeeById(id).orElseThrow(() -> new NoSuchElementException("Employee not found"));
         employeeRepository.delete(deletedEmployee);
