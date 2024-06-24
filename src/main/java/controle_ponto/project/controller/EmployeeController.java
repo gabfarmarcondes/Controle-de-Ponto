@@ -46,7 +46,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete{id}")
-    public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id, @RequestBody @Validated RequestEmployee employee) {
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
         Employee deletedEmployee = employeeRepository.findEmployeeById(id).orElseThrow(() -> new NoSuchElementException("Employee not found"));
         employeeRepository.delete(deletedEmployee);
         return ResponseEntity.ok(deletedEmployee);
