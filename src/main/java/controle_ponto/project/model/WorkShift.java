@@ -1,5 +1,6 @@
 package controle_ponto.project.model;
 
+import controle_ponto.project.dto.RequestWorkShift;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,11 +19,12 @@ import java.time.LocalTime;
 @Table(name = "workShift_tab")
 public class WorkShift {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "employeeId")
-    private Employee employeeId;
+    @ManyToOne
+    @JoinColumn(name = "employeeID")
+    private Employee employee;
 
     private Date date;
 
@@ -34,4 +36,14 @@ public class WorkShift {
 
     @Column(length = 100)
     private String notes;
+
+    public WorkShift(RequestWorkShift workShift, Employee employee) {
+        this.id = workShift.id();
+        this.employee = employee;
+        this.date = (Date) workShift.date();
+        this.shiftType = workShift.shiftType();
+        this.startDateTime = workShift.start();
+        this.endDateTime = workShift.end();
+        this.notes = workShift.notes();
+    }
 }

@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface WorkShiftRepository extends JpaRepository<WorkShift, Long> {
     WorkShift findByDate(Date date);
 
-    @Query("SELECT ws FROM workShift ws WHERE ws.employeeId.id = :employeeId")
+    @Query("SELECT ws FROM workShift ws WHERE ws.employee.id = :employeeId")
     List<WorkShift> findByEmployeeId(@Param("employeeId") Long employeeId);
 
 }

@@ -19,7 +19,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "employeeId", cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private WorkShift workShift;
 
     @Column(nullable = false, length = 50)
@@ -28,9 +28,9 @@ public class Employee {
     @Column(nullable = false, length = 50)
     private String job;
 
-    public Employee(RequestEmployee requestEmployeeemployee) {
-        this.id = requestEmployeeemployee.id();
-        this.name = requestEmployeeemployee.name();
-        this.job = requestEmployeeemployee.job();
+    public Employee(RequestEmployee requestEmployee) {
+        this.id = requestEmployee.id();
+        this.name = requestEmployee.name();
+        this.job = requestEmployee.job();
     }
 }
